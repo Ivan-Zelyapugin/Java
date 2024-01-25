@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+<header th:fragment="header">
+    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none">
+            <span class="fs-4">SN</span>
+        </a>
+        <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+            <a th:if="${user.email}" class="me-3 py-2 link-body-emphasis text-decoration-none btn btn-outline-primary" href="/user">
+                <span class="bi bi-person"></span> Моя страница
+            </a>
+            <a th:if="${user.isAdmin()}" class="me-3 py-2 link-body-emphasis text-decoration-none btn btn-outline-success" href="/admin">
+                <span class="bi bi-shield-fill"></span> Панель администратора
+            </a>
+            <a th:if="${user.isModer()}" class="me-3 py-2 link-body-emphasis text-decoration-none btn btn-outline-warning" href="/moder">
+                <span class="bi bi-shield-check"></span> Панель модератора
+            </a>
+            <a th:if="${user.email}" class="me-3 py-2 link-body-emphasis text-decoration-none btn btn-outline-danger" href="/logout">
+                <span class="bi bi-box-arrow-right"></span> Выйти
+            </a>
+            <a th:unless="${user.email}" class="me-3 py-2 link-body-emphasis text-decoration-none btn btn-outline-info" href="/login">
+                <span class="bi bi-box-arrow-in-right"></span> Вход
+            </a>
+        </nav>
+    </div>
+</header>

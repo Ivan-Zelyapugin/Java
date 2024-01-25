@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <style>
+        .img-fluid {
+            display: none;
+            max-width: 30%;
+            height: auto;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            padding: 5px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>Создать новый пост</h3>
+    <div>
+        <form th:action="@{/post/create}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Заголовок</label>
+                <input type="text" class="form-control" id="title" name="title">
+            </div>
+            <div class="form-group">
+                <label for="anons">Кратко</label>
+                <input type="text" class="form-control" id="anons" name="anons">
+            </div>
+            <div class="form-group">
+                <label for="text">Полное описание</label>
+                <input type="text" class="form-control" id="text" name="text">
+            </div>
+            <div class="form-group">
+                <label for="file1">Image1</label>
+                <input type="file" class="form-control-file" id="file1" name="file1" onchange="previewImage(this, 'image-preview-1')">
+                <img id="image-preview-1" alt="Image Preview" class="img-fluid mt-2">
+            </div>
+            <div class="form-group">
+                <label for="file2">Image2</label>
+                <input type="file" class="form-control-file" id="file2" name="file2" onchange="previewImage(this, 'image-preview-2')">
+                <img id="image-preview-2" alt="Image Preview" class="img-fluid mt-2">
+            </div>
+            <div class="form-group">
+                <label for="file3">Image3</label>
+                <input type="file" class="form-control-file" id="file3" name="file3" onchange="previewImage(this, 'image-preview-3')">
+                <img id="image-preview-3" alt="Image Preview" class="img-fluid mt-2">
+            </div>
+
+            <p>Другой файл<input type="file" name="otherFile"></p>
+            <button type="submit" class="btn btn-primary">Создать</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function previewImage(input, previewId) {
+        var preview = document.getElementById(previewId);
+        var file = input.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+            preview.style.display = 'block';
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '';
+            preview.style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<div th:fragment="footer" class="footer fixed-bottom mt-5 py-3 text-center bg-light text-dark">
+    <p class="mb-1">Выполнила бригада №7 22ВП2: Зеляпугин и Сафронов</p>
+    <p class="mb-1">Тема: Социальная сеть</p>
+    <p class="mb-0">Текущее время: <span id="time"></span></p>
+    <div class="mt-2">Кол-во посещений сайта: <span th:text="${counter}"></span></div>
+<!--    Подключаем скрипт для обновления времени -->
+    <script src="js/time.js"></script>
+</div>
+
+
+
+

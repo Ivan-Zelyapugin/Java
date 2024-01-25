@@ -1,0 +1,59 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 style="text-align: center" th:text="'Редактирование пользователя ' + ${user.first_name}+ ' ' + ${user.second_name}"/><hr>
+<form th:action="'/admin/user/edit/' + ${user.id}" method="post">
+    <div th:each="role:${roles}">
+        <label><input type="checkbox" th:name="${role}" th:text="${role}"  th:checked="${#lists.contains(user.roles, role)}"/> ></label>
+    </div>
+<button type="submit">Сохранить</button>
+</form>
+</body>
+</html>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Подключение стилей Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container mt-5">
+    <h1 class="text-center" th:text="'Редактирование ролей пользователя ' + ${user.first_name} + ' ' + ${user.second_name}"></h1>
+    <hr>
+    <form th:action="'/admin/user/edit/' + ${user.id}" method="post">
+        <!-- Использование классов Bootstrap для стилизации формы и чекбоксов -->
+        <div class="form-group" th:each="role:${roles}">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" th:name="${role}"
+                       th:checked="${#lists.contains(user.roles, role)}"/>
+                <label class="form-check-label" th:text="${role}"></label>
+
+            </div>
+        </div>
+        <!-- Использование класса Bootstrap для кнопки -->
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+<!-- Подключение скриптов Bootstrap (необходимо для некоторых компонентов) -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+        integrity="sha384-gpUrfifR3L2Umtl9yxHOG02LB4FqfUGZo6K5Fm9KfRoCJp5VCB8A9X3zN5ZwQ"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

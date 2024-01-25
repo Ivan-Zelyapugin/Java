@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>АДМИНКА</title>
+    <!-- Подключение стилей Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<header th:insert="blocks/header::header"></header>
+<!-- Добавление класса для стилизации Bootstrap -->
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Email</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Дата рождения</th>
+        <th>Активность</th>
+        <th>Роли</th>
+        <th>БАН</th>
+        <th>Изменить роли</th>
+        <th>Доп информация</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user:${users}">
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.first_name}"></td>
+        <td th:text="${user.second_name}"></td>
+        <td th:text="${user.birthday}"></td>
+        <td>
+            <!-- Использование стилей Bootstrap 5 для отображения активного статуса -->
+            <span th:if="${user.active}" class="badge bg-success text-light">true</span>
+            <span th:unless="${user.active}" class="badge bg-danger text-light">false</span>
+        </td>
+        <td>
+            <span th:each="role, iterStat : ${user.roles}">
+                <span th:text="${role}"></span>
+                <span th:if="${!iterStat.last}">, </span>
+            </span>
+        </td>
+
+        <td>
+            <!-- Использование условий Thymeleaf для изменения цвета и текста кнопки -->
+            <form th:action="@{'/admin/user/ban/'+${user.id}}" method="post">
+                <button th:if="${user.id!=usr.id}" type="submit" th:class="${!user.active ? 'btn btn-warning' : 'btn btn-danger'}"
+                        th:text="${!user.active ? 'Разбан' : 'Бан'}"></button>
+            </form>
+        </td>
+        <td><a th:href="'/admin/user/edit/'+${user.id}" class="btn btn-info">Редактирование</a></td>
+        <td><a th:href="'/user/'+${user.id}" class="btn btn-primary">Подробная информация</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

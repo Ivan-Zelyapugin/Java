@@ -1,0 +1,295 @@
+<div th:fragment="post">
+<!--    <link rel="stylesheet"   href="css/post.css">-->
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 2rem;
+            color: #414b56;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            overflow: hidden;
+            box-shadow: 0px 2px 20px #d7dfe2;
+            background: white;
+            border-radius: 0.5rem;
+            position: relative;
+            width: 350px;
+            margin: 1rem;
+            transition: 250ms all ease-in-out;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 2px 40px #d7dfe2;
+        }
+
+        .banner-img {
+            object-fit: cover;
+            height: 14rem;
+            width: 100%;
+        }
+
+        .card-banner {
+            position: relative;
+        }
+
+        .category-tag {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            background: red;
+            padding: 0.5rem 1.3rem 0.5rem 1rem;
+            text-transform: uppercase;
+            position: absolute;
+            z-index: 1;
+            top: 1rem;
+            border-radius: 0 2rem 2rem 0;
+        }
+
+        .popular {
+            background: #ef257a;
+        }
+
+        .technology {
+            background: #651fff;
+        }
+
+        .psychology {
+            background: #e85808;
+        }
+
+        .card-body {
+            margin: 15rem 1rem 1rem 1rem;
+        }
+
+        .blog-hashtag {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #4d97b2;
+        }
+
+        .blog-title {
+            line-height: 1.5rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .blog-description {
+            color: #616b74;
+            font-size: 0.9rem;
+        }
+
+        .card-profile {
+            display: flex;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .card-profile-info {
+            margin-left: 1rem;
+        }
+
+        .profile-name {
+            font-size: 1rem;
+        }
+
+        .profile-followers {
+            color: #616b74;
+            font-size: 0.9rem;
+        }
+    </style>
+    <div th:each="el:${posts}">
+        <div th:if="${el.active}" class="wrapper">
+            <div class="card">
+                <div class="card-profile">
+                    <img class="profile-img"
+                         th:if="${el.user.avatarId}" th:src="'/avatar/'+${el.user.avatarId}" alt=''>
+                    <div class="card-profile-info">
+                        <a class="profile-name" th:href="'/user/'+${el.user.id}"
+                           th:text="${el.user.first_name+' '+el.user.second_name}"/>
+                    </div>
+                </div>
+                <p th:text="${el.anons}"/>
+                <a th:href="@{'/post/' + ${el.id}}">Ссылка на подробный пост</a>
+                <div class="card-banner">
+                    <h2 class="blog-title" th:text="${el.title}"/>
+
+                    <img class="banner-img" th:if="${el.previewImageId}" th:src="'/images/'+${el.previewImageId}" alt=''>
+
+                </div>
+                <div class="card-body">
+
+                    <p class="blog-description" th:text="${el.text}"/>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--
+<div th:fragment="post">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 2rem;
+            color: #414b56;
+            background-color: #f8f9fa;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            border-radius: 0.5rem;
+            width: 350px;
+            margin: 1rem;
+            overflow: hidden;
+            transition: 250ms all ease-in-out;
+            cursor: pointer;
+            box-shadow: 0px 2px 20px #d7dfe2;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 2px 40px #d7dfe2;
+        }
+
+        .banner-img {
+            object-fit: cover;
+            height: 14rem;
+            width: 100%;
+        }
+
+        .card-banner {
+            position: relative;
+        }
+
+        .category-tag {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            background: red;
+            padding: 0.5rem 1.3rem 0.5rem 1rem;
+            text-transform: uppercase;
+            position: absolute;
+            z-index: 1;
+            top: 1rem;
+            border-radius: 0 2rem 2rem 0;
+        }
+
+        .popular {
+            background: #ef257a;
+        }
+
+        .technology {
+            background: #651fff;
+        }
+
+        .psychology {
+            background: #e85808;
+        }
+
+        .card-body {
+            margin: 15rem 1rem 1rem 1rem;
+        }
+
+        .blog-hashtag {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #4d97b2;
+        }
+
+        .blog-title {
+            line-height: 1.5rem;
+            margin: 1rem 0 0.5rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .blog-description {
+            color: #616b74;
+            font-size: 0.9rem;
+        }
+
+        .card-profile {
+            display: flex;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .card-profile-info {
+            margin-left: 1rem;
+        }
+
+        .profile-name {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .profile-name:hover {
+            color: #007bff;
+        }
+
+        .profile-followers {
+            color: #616b74;
+            font-size: 0.9rem;
+        }
+    </style>
+
+    <div class="wrapper">
+        <div th:each="el:${posts}" class="card">
+            <div class="card-profile">
+                <img class="profile-img" th:if="${el.user.avatarId}" th:src="'/avatar/'+${el.user.avatarId}" alt=''>
+                <div class="card-profile-info">
+                    <a class="profile-name" th:href="'/user/'+${el.user.id}" th:text="${el.user.first_name+' '+el.user.second_name}"></a>
+                </div>
+            </div>
+            <div class="card-banner">
+                <h2 class="blog-title" th:text="${el.title}"></h2>
+                <img class="banner-img" th:if="${el.previewImageId}" th:src="'/images/'+${el.previewImageId}" alt=''>
+            </div>
+            <div class="card-body">
+                <p class="blog-description" th:text="${el.text}"></p>
+            </div>
+            <p th:text="${el.views}"></p>
+            <p>кол-во просмотров</p>
+        </div>
+    </div>
+</div>
+-->

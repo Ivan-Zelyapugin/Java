@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование данных</title>
+
+    <!-- Подключение стилей Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+
+<h3>Создать новый пост</h3>
+
+<div>
+    <form th:action="@{/user/edit}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input th:value="${user.email}" name="email" type="email" class="form-control" disabled>
+        </div>
+        <div class="form-group">
+            <label for="first_name">Имя:</label>
+            <input type="text" name="first_name" th:value="${user.first_name}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="second_name">Фамилия:</label>
+            <input type="text" name="second_name" th:value="${user.second_name}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="birthday">Дата рождения:</label>
+            <input type="date" name="birthday" th:value="${user.birthday}" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Редактировать</button>
+    </form>
+</div>
+
+<!-- Подключение скриптов Bootstrap (необходимо для некоторых компонентов) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
